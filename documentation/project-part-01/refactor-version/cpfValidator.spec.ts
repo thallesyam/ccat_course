@@ -1,4 +1,4 @@
-import { cpfValidator } from "../../src/v1/cpfValidator"
+import { cpfValidator } from './cpf'
 
 describe('CPF Validator', () => {
   it("should return false if function receive invalid parameter", () => {

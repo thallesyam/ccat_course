@@ -1,4 +1,4 @@
-import { Cpf } from "../../src/v2/Cpf"
+import { Cpf } from "../src/Cpf"
 
 describe('CPF', () => {
   it("should be return correctly cpf", () => {
