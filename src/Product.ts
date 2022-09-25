@@ -1,7 +1,7 @@
 type ProductModel = {
-  description?: string,
-  price?: number,
-  quantity?: number
+  description: string,
+  price: number,
+  quantity: number
 }
 
 export class Product {
