@@ -12,8 +12,7 @@ describe('CPF Validator', () => {
   })
 
   it("should return true if function receive valid cpf", () => {
-    const sut = cpfValidator('186.301.758-509')
-    expect(sut).toBeFalsy()
+    expect(() => cpfValidator('186.301.758-509')).toThrow(new Error('Invalid Cpf'))
   })
 
   it("should return false if function receive invalid parameter", () => {

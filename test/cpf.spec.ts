@@ -29,23 +29,17 @@ describe('CPF', () => {
 
   it("should be return true if cpf contains invalid format", () => {
     const sut = new Cpf('44444444444')
-    expect(sut.isInvalidFormat()).toBeTruthy()
+    expect(sut.hasAllDigitsEqual()).toBeTruthy()
   })
 
   it("should be return false if cpf contains invalid format", () => {
     const sut = new Cpf('48950236800')
-    expect(sut.isInvalidFormat()).toBeFalsy()
+    expect(sut.hasAllDigitsEqual()).toBeFalsy()
   })
 
   it("should be error on invalid format", () => {
     const sut = new Cpf('44444444444')
     expect(() => sut.cpfValidator()).toThrow(new Error('Invalid Cpf'))
-  })
-
-  it("should be return correctly digit", () => {
-    const sut = new Cpf('48950236800')
-    expect(sut.calcDigitOfCpf(1)).toEqual(0)
-    expect(sut.calcDigitOfCpf(10)).toEqual(1)
   })
 
   it("should be false if receive invalid cpf", () => {

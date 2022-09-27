@@ -4,51 +4,47 @@ export class Cpf {
     readonly cpf: string
   ) {
     if(!this.cpf) throw new Error('Cpf not found')
-    if(!this.isValidLength()) throw new Error('Invalid Cpf')
-
     this.cpf = this.formatCpf()
+    if(!this.isValidLength()) throw new Error('Invalid Cpf')
   }
 
   getCpf() {
     return this.cpf
   }
 
-  cpfValidator () {
-    if(this.isInvalidFormat()) throw new Error('Invalid Cpf')
+  formatCpf() {
+    return this.cpf.replace(/\D/g, "")
+  }
 
-    let cpfSumFirstCharacter = 0, cpfSumSecondCharacter = 0;  
-    for (let digit = 1; digit < this.cpf.length - 1; digit++) {  
-        let singleCpfBaseDigit = Number(this.cpf.substring(digit -1, digit));  							
-        cpfSumFirstCharacter = cpfSumFirstCharacter + ( 11 - digit ) * singleCpfBaseDigit;  
-        cpfSumSecondCharacter = cpfSumSecondCharacter + ( 12 - digit ) * singleCpfBaseDigit;  
-    };  
-    const firstDigit = this.calcDigitOfCpf(cpfSumFirstCharacter % 11);
-    const secondDigitCalc = cpfSumSecondCharacter + 2 * firstDigit;  
-    const secondDigit = this.calcDigitOfCpf(secondDigitCalc % 11)
-    const originalDigitsToValidate = this.cpf.substring(this.cpf.length-2, this.cpf.length);  
+  cpfValidator () {
+    if(this.hasAllDigitsEqual()) throw new Error('Invalid Cpf')
+    const firstDigit = this.calculateDigit(10);
+    const secondDigit = this.calculateDigit(11);
+    const originalDigitsToValidate = this.extractDigit()  
     const validCpfDigits = `${firstDigit}${secondDigit}`
     return originalDigitsToValidate === validCpfDigits;
   }
 
-  formatCpf() {
-    const formatedCpf = this.cpf
-    .replaceAll('.','')
-    .replaceAll('-','')
-    .replaceAll(" ","")
-
-    return formatedCpf
+  extractDigit() {
+    return this.cpf.substring(this.cpf.length-2, this.cpf.length)
   }
-
+  
   isValidLength() {
-    return this.cpf.length >= 11 && this.cpf.length <= 14
+    return this.cpf.length === 11
   }
 
-  isInvalidFormat() {
-    return this.formatCpf().split("").every(digit => digit === this.cpf[0])
+  hasAllDigitsEqual() {
+    return this.cpf.split("").every(digit => digit === this.cpf[0])
   }
 
-  calcDigitOfCpf(divisionRest: number) {
-    return divisionRest < 2 ? 0 : 11 - divisionRest;  
+  calculateDigit(factor: number) {
+    let total = 0
+    for(const digit of this.cpf) {
+      if(factor > 1) total += Number(digit) * factor--
+    }
+  
+    const rest = total % 11
+  
+    return rest < 2 ? 0 : 11 - rest
   }
-
 }

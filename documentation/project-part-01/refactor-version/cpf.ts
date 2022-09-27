@@ -1,40 +1,38 @@
 function isValidLength(length: number) {
-  return length >= 11 && length <= 14
+  return length === 11
 }
 
-function isInvalidFormat(cpf: string[]) {
+function hasAllDigitsEqual(cpf: string[]) {
   return cpf.every(digit => digit === cpf[0])
 }
 
-function calcDigitOfCpf(divisionRest: number) {
-  return divisionRest < 2 ? 0 : 11 - divisionRest;  
+function formatCpf(cpf: string) {
+  return cpf.replace(/\D/g, "")
+}
+
+function extractDigit(cpf: string) {
+  return cpf.substring(cpf.length-2, cpf.length)
+}
+
+function calculateDigit(cpf: string, factor: number) {
+  let total = 0
+  for(const digit of cpf) {
+    if(factor > 1) total += Number(digit) * factor--
+  }
+
+  const rest = total % 11
+
+  return rest < 2 ? 0 : 11 - rest
 }
 
 export function cpfValidator (cpf: string) {
   if(!cpf) throw new Error('Cpf not found')
-  if(!isValidLength(cpf.length)) throw new Error('Invalid Cpf')
-
-  const formatedCpf = cpf
-  .replaceAll('.','')
-  .replaceAll('-','')
-  .replaceAll(" ","")
-
-  if(isInvalidFormat(formatedCpf.split(""))) throw new Error('Invalid Cpf')
-
-  try{  
-      let cpfSumFirstCharacter = 0, cpfSumSecondCharacter = 0;  
-      for (let digit = 1; digit < formatedCpf.length - 1; digit++) {  
-          let singleCpfBaseDigit = Number(formatedCpf.substring(digit -1, digit));  							
-          cpfSumFirstCharacter = cpfSumFirstCharacter + ( 11 - digit ) * singleCpfBaseDigit;  
-          cpfSumSecondCharacter = cpfSumSecondCharacter + ( 12 - digit ) * singleCpfBaseDigit;  
-      };  
-      const firstDigit = calcDigitOfCpf(cpfSumFirstCharacter % 11);
-      const secondDigitCalc = cpfSumSecondCharacter + 2 * firstDigit;  
-      const secondDigit = calcDigitOfCpf(secondDigitCalc % 11)
-      const originalDigitsToValidate = formatedCpf.substring(formatedCpf.length-2, formatedCpf.length);  
-      const validCpfDigits = `${firstDigit}${secondDigit}`
-      return originalDigitsToValidate === validCpfDigits;
-  }catch (e){  
-     throw new Error('Unexpected error during validation!')
-  }  
+  const formatedCpf = formatCpf(cpf)
+  if(!isValidLength(formatedCpf.length)) throw new Error('Invalid Cpf')
+  if(hasAllDigitsEqual(formatedCpf.split(""))) throw new Error('Invalid Cpf')
+  const firstDigit = calculateDigit(formatedCpf, 10);
+  const secondDigit = calculateDigit(formatedCpf, 11);
+  const originalDigitsToValidate = extractDigit(cpf)  
+  const validCpfDigits = `${firstDigit}${secondDigit}`
+  return originalDigitsToValidate === validCpfDigits;
 }
