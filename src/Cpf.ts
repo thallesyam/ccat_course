@@ -16,22 +16,18 @@ export class Cpf {
   cpfValidator () {
     if(this.isInvalidFormat()) throw new Error('Invalid Cpf')
 
-    try{  
-        let cpfSumFirstCharacter = 0, cpfSumSecondCharacter = 0;  
-        for (let digit = 1; digit < this.cpf.length - 1; digit++) {  
-            let singleCpfBaseDigit = Number(this.cpf.substring(digit -1, digit));  							
-            cpfSumFirstCharacter = cpfSumFirstCharacter + ( 11 - digit ) * singleCpfBaseDigit;  
-            cpfSumSecondCharacter = cpfSumSecondCharacter + ( 12 - digit ) * singleCpfBaseDigit;  
-        };  
-        const firstDigit = this.calcDigitOfCpf(cpfSumFirstCharacter % 11);
-        const secondDigitCalc = cpfSumSecondCharacter + 2 * firstDigit;  
-        const secondDigit = this.calcDigitOfCpf(secondDigitCalc % 11)
-        const originalDigitsToValidate = this.cpf.substring(this.cpf.length-2, this.cpf.length);  
-        const validCpfDigits = `${firstDigit}${secondDigit}`
-        return originalDigitsToValidate === validCpfDigits;
-    }catch (e){  
-       throw new Error('Unexpected error during validation!')
-    }  
+    let cpfSumFirstCharacter = 0, cpfSumSecondCharacter = 0;  
+    for (let digit = 1; digit < this.cpf.length - 1; digit++) {  
+        let singleCpfBaseDigit = Number(this.cpf.substring(digit -1, digit));  							
+        cpfSumFirstCharacter = cpfSumFirstCharacter + ( 11 - digit ) * singleCpfBaseDigit;  
+        cpfSumSecondCharacter = cpfSumSecondCharacter + ( 12 - digit ) * singleCpfBaseDigit;  
+    };  
+    const firstDigit = this.calcDigitOfCpf(cpfSumFirstCharacter % 11);
+    const secondDigitCalc = cpfSumSecondCharacter + 2 * firstDigit;  
+    const secondDigit = this.calcDigitOfCpf(secondDigitCalc % 11)
+    const originalDigitsToValidate = this.cpf.substring(this.cpf.length-2, this.cpf.length);  
+    const validCpfDigits = `${firstDigit}${secondDigit}`
+    return originalDigitsToValidate === validCpfDigits;
   }
 
   formatCpf() {

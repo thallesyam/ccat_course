@@ -7,6 +7,10 @@ describe('CPF', () => {
     expect(sut.getCpf()).toEqual(cpf)
   })
 
+  it("should return error", () => {
+    expect(() => new Cpf('')).toThrow(new Error('Cpf not found'))
+  })
+
   it("should be return cpf in correctly format", () => {
     const cpf = '489-502 368.12'
     const sut = new Cpf(cpf)

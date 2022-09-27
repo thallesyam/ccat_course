@@ -15,4 +15,8 @@ describe('Product', () => {
   it('should throw error if incorrect quantity', () => {
     expect(() => new Product( { description: 'fake-desc', price: 10, quantity: -1 })).toThrow(new Error('Invalid quantity'))
   })
+
+  it('should throw error if incorrect quantity', () => {
+    expect(() => new Product({} as any)).toThrow(new Error('Invalid Format'))
+  })
 })
