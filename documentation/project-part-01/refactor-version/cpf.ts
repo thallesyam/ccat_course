@@ -11,7 +11,7 @@ function formatCpf(cpf: string) {
 }
 
 function extractDigit(cpf: string) {
-  return cpf.substring(cpf.length-2, cpf.length)
+  return cpf.slice(9)
 }
 
 function calculateDigit(cpf: string, factor: number) {
@@ -19,9 +19,7 @@ function calculateDigit(cpf: string, factor: number) {
   for(const digit of cpf) {
     if(factor > 1) total += Number(digit) * factor--
   }
-
   const rest = total % 11
-
   return rest < 2 ? 0 : 11 - rest
 }
 
@@ -32,7 +30,7 @@ export function cpfValidator (cpf: string) {
   if(hasAllDigitsEqual(formatedCpf.split(""))) throw new Error('Invalid Cpf')
   const firstDigit = calculateDigit(formatedCpf, 10);
   const secondDigit = calculateDigit(formatedCpf, 11);
-  const originalDigitsToValidate = extractDigit(cpf)  
+  const originalDigitsToValidate = extractDigit(formatedCpf)  
   const validCpfDigits = `${firstDigit}${secondDigit}`
   return originalDigitsToValidate === validCpfDigits;
 }

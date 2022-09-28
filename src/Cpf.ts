@@ -26,7 +26,7 @@ export class Cpf {
   }
 
   extractDigit() {
-    return this.cpf.substring(this.cpf.length-2, this.cpf.length)
+    return this.cpf.slice(9)
   }
   
   isValidLength() {
