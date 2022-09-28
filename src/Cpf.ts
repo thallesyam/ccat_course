@@ -1,45 +1,45 @@
-export class Cpf {
-
+export default class Cpf {
   constructor(
-    readonly cpf: string
+    readonly value: string
   ) {
-    if(!this.cpf) throw new Error('Cpf not found')
-    this.cpf = this.formatCpf()
-    if(!this.isValidLength()) throw new Error('Invalid Cpf')
+    if(!this.cpfValidator(value)) throw new Error('Invalid Cpf')
   }
 
   getCpf() {
-    return this.cpf
+    return this.value
   }
-
-  formatCpf() {
-    return this.cpf.replace(/\D/g, "")
-  }
-
-  cpfValidator () {
-    if(this.hasAllDigitsEqual()) throw new Error('Invalid Cpf')
-    const firstDigit = this.calculateDigit(10);
-    const secondDigit = this.calculateDigit(11);
-    const originalDigitsToValidate = this.extractDigit()  
+  
+  private cpfValidator (cpf: string) {
+    if(!cpf) throw new Error('Invalid Cpf')
+    cpf = this.formatCpf(cpf)
+    if(!this.isValidLength(cpf)) throw new Error('Invalid Cpf')
+    if(this.hasAllDigitsEqual(cpf)) throw new Error('Invalid Cpf')
+    const firstDigit = this.calculateDigit(cpf, 10);
+    const secondDigit = this.calculateDigit(cpf, 11);
+    const originalDigitsToValidate = this.extractDigit(cpf)  
     const validCpfDigits = `${firstDigit}${secondDigit}`
     return originalDigitsToValidate === validCpfDigits;
   }
 
-  extractDigit() {
-    return this.cpf.slice(9)
-  }
-  
-  isValidLength() {
-    return this.cpf.length === 11
+  private formatCpf(cpf: string) {
+    return cpf.replace(/\D/g, "")
   }
 
-  hasAllDigitsEqual() {
-    return this.cpf.split("").every(digit => digit === this.cpf[0])
+  private isValidLength(cpf: string) {
+    return cpf.length === 11
   }
 
-  calculateDigit(factor: number) {
+  private extractDigit(cpf: string) {
+    return cpf.slice(9)
+  }
+
+  private hasAllDigitsEqual(cpf: string) {
+    return cpf.split("").every(digit => digit === cpf[0])
+  }
+
+  private calculateDigit(cpf: string, factor: number) {
     let total = 0
-    for(const digit of this.cpf) {
+    for(const digit of cpf) {
       if(factor > 1) total += Number(digit) * factor--
     }
   
