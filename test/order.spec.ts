@@ -64,3 +64,9 @@ test('Deve criar um pedido com fete', () => {
   order.addItem(new Item(1, 1000, 'Guitarra', new Dimension(100, 30, 10, 3)), 1)
   expect(order.getTotal()).toBe(1030)
 })
+
+test('Deve criar um pedido com código', () => {
+  const order = new Order('198.454.187-08', new Date('2022-03-10T10:00:00'))
+  order.addItem(new Item(1, 1000, 'Guitarra', new Dimension(100, 30, 10, 3)), 1)
+  expect(order.getCode()).toBe('202200000001')
+})
