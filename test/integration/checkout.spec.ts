@@ -1,12 +1,12 @@
-import Checkout from "../src/application/Checkout"
-import GetOrdersByCpf from "../src/application/GetOrdersByCpf"
-import Coupon from "../src/domain/entity/Coupon"
-import Dimension from "../src/domain/entity/Dimension"
-import Item from "../src/domain/entity/Item"
-import MemoryRepositoryFactory from "../src/infra/factory/memory-repository-factory"
-import CouponRepositoryMemory from "../src/infra/repository/CouponRepositoryMemory"
-import ItemRepositoryMemory from "../src/infra/repository/ItemRepositoryMemory"
-import OrderRepositoryMemory from "../src/infra/repository/OrderRepositoryMemory"
+import Checkout from "../../src/application/Checkout"
+import GetOrdersByCpf from "../../src/application/GetOrdersByCpf"
+import Coupon from "../../src/domain/entity/Coupon"
+import Dimension from "../../src/domain/entity/Dimension"
+import Item from "../../src/domain/entity/Item"
+import MemoryRepositoryFactory from "../../src/infra/factory/memory-repository-factory"
+import CouponRepositoryMemory from "../../src/infra/repository/CouponRepositoryMemory"
+import ItemRepositoryMemory from "../../src/infra/repository/ItemRepositoryMemory"
+import OrderRepositoryMemory from "../../src/infra/repository/OrderRepositoryMemory"
 
 test('Deve fazer o pedido', async () => {
   const repositoryFactory = new MemoryRepositoryFactory()

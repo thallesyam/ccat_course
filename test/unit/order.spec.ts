@@ -1,7 +1,7 @@
-import Coupon from "../src/domain/entity/Coupon"
-import Dimension from "../src/domain/entity/Dimension"
-import Item from "../src/domain/entity/Item"
-import Order from "../src/domain/entity/Order"
+import Coupon from "../../src/domain/entity/Coupon"
+import Dimension from "../../src/domain/entity/Dimension"
+import Item from "../../src/domain/entity/Item"
+import Order from "../../src/domain/entity/Order"
 
 
 test('Não deve criar um pedido com CPF inválido', () => {
@@ -59,9 +59,10 @@ test('Não deve criar item duplicado', () => {
   expect(() => order.addItem(new Item(1, 1000, 'Guitarra'), 1)).toThrow(new Error('Duplicated item'))
 })
 
-test('Deve criar um pedido com fete', () => {
+test('Deve criar um pedido com frete', () => {
   const order = new Order('198.454.187-08')
   order.addItem(new Item(1, 1000, 'Guitarra', new Dimension(100, 30, 10, 3)), 1)
+  order.freight = 30
   expect(order.getTotal()).toBe(1030)
 })
 
