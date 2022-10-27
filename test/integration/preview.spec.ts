@@ -4,9 +4,9 @@ import Coupon from "../../src/domain/entity/Coupon"
 import Dimension from "../../src/domain/entity/Dimension"
 import Item from "../../src/domain/entity/Item"
 import ZipCode from "../../src/domain/entity/ZipCode"
-import CouponRepositoryMemory from "../../src/infra/repository/CouponRepositoryMemory"
-import ItemRepositoryMemory from "../../src/infra/repository/ItemRepositoryMemory"
-import ZipCodeRepositoryMemory from "../../src/infra/repository/ZipCodeRepositoryMemory"
+import CouponRepositoryMemory from "../../src/infra/repository/memory/CouponRepositoryMemory"
+import ItemRepositoryMemory from "../../src/infra/repository/memory/ItemRepositoryMemory"
+import ZipCodeRepositoryMemory from "../../src/infra/repository/memory/ZipCodeRepositoryMemory"
 
 let preview: Preview
 

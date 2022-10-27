@@ -2,9 +2,9 @@ import RepositoryFactory from "../../domain/factory/repository-factory";
 import CouponRepository from "../../domain/repository/CouponRepository";
 import ItemRepository from "../../domain/repository/ItemRepository";
 import OrderRepository from "../../domain/repository/OrderRepository";
-import CouponRepositoryMemory from "../repository/CouponRepositoryMemory";
-import ItemRepositoryMemory from "../repository/ItemRepositoryMemory";
-import OrderRepositoryMemory from "../repository/OrderRepositoryMemory";
+import CouponRepositoryMemory from "../repository/memory/CouponRepositoryMemory";
+import ItemRepositoryMemory from "../repository/memory/ItemRepositoryMemory";
+import OrderRepositoryMemory from "../repository/memory/OrderRepositoryMemory";
 
 export default class MemoryRepositoryFactory implements RepositoryFactory {
   itemRepository?: ItemRepository

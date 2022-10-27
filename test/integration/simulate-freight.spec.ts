@@ -3,7 +3,7 @@ import Dimension from "../../src/domain/entity/Dimension"
 import Item from "../../src/domain/entity/Item"
 import PgPromiseAdapter from "../../src/infra/database/PgPromiseAdapter"
 import { ZipCodeRepositoryDatabase } from "../../src/infra/repository/database/ZipCodeRepositoryDatabase"
-import ItemRepositoryMemory from "../../src/infra/repository/ItemRepositoryMemory"
+import ItemRepositoryMemory from "../../src/infra/repository/memory/ItemRepositoryMemory"
 
 test('Deve simular o frete', async () => {
   const itemRepository = new ItemRepositoryMemory()

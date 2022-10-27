@@ -11,13 +11,13 @@ import OrderController from "./infra/controller/OrderController"
 import PgPromiseAdapter from "./infra/database/PgPromiseAdapter"
 import MemoryRepositoryFactory from "./infra/factory/memory-repository-factory"
 import ExpressAdapter from "./infra/http/ExpressAdapter"
-import CouponRepositoryMemory from "./infra/repository/CouponRepositoryMemory"
+import CouponRepositoryMemory from "./infra/repository/memory/CouponRepositoryMemory"
 import { CouponRepositoryDatabase } from "./infra/repository/database/CouponRepositoryDatabase"
 import ItemRepositoryDatabase from "./infra/repository/database/ItemRepositoryDatabase"
 import { ZipCodeRepositoryDatabase } from "./infra/repository/database/ZipCodeRepositoryDatabase"
-import ItemRepositoryMemory from "./infra/repository/ItemRepositoryMemory"
-import OrderRepositoryMemory from "./infra/repository/OrderRepositoryMemory"
-import ZipCodeRepositoryMemory from "./infra/repository/ZipCodeRepositoryMemory"
+import ItemRepositoryMemory from "./infra/repository/memory/ItemRepositoryMemory"
+import OrderRepositoryMemory from "./infra/repository/memory/OrderRepositoryMemory"
+import ZipCodeRepositoryMemory from "./infra/repository/memory/ZipCodeRepositoryMemory"
 
 // const itemRepository = new ItemRepositoryMemory()
 // itemRepository.save(new Item(1, 1000, 'Guitarra', new Dimension(100, 30, 10, 3)))

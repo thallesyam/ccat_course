@@ -1,5 +1,5 @@
-import ZipCode from "../../domain/entity/ZipCode"
-import ZipCodeRepository from "../../domain/repository/ZipCodeRepository"
+import ZipCode from "../../../domain/entity/ZipCode"
+import ZipCodeRepository from "../../../domain/repository/ZipCodeRepository"
 
 export default class ZipCodeRepositoryMemory implements ZipCodeRepository {
   zipcodes: ZipCode[]
