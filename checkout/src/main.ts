@@ -15,6 +15,7 @@ import OrderRepositoryMemory from "./infra/repository/memory/OrderRepositoryMemo
 import ZipCodeRepositoryMemory from "./infra/repository/memory/ZipCodeRepositoryMemory"
 import GetItemHttpGateway from "./infra/gateway/get-item-http-gateway"
 import CalculateFreightHttpGateway from "./infra/gateway/calculate-freight-http-gateway"
+import DecrementStockHttpGateway from "./infra/gateway/decrement-stock-http-gateway"
 
 const connection = new PgPromiseAdapter()
 const itemRepository = new ItemRepositoryDatabase(connection)
@@ -27,11 +28,12 @@ zipCodeRepository.save(new ZipCode('88015600', 'Rua Almirante Lamego', 'Centro',
 zipCodeRepository.save(new ZipCode('22060030', 'Rua Aires Saldanha', 'Copacabana', new Coord(-22.9129, -43.2003)))
 const getItemGateway = new GetItemHttpGateway()
 const calculateFreightGateway = new CalculateFreightHttpGateway()
+const decrementStockGateway = new DecrementStockHttpGateway()
 const preview = new Preview(couponRepository, getItemGateway, calculateFreightGateway)
-const checkout = new Checkout(repositoryFactory)
+const checkout = new Checkout(repositoryFactory, getItemGateway, calculateFreightGateway, decrementStockGateway)
 const getOrderByCpf = new GetOrdersByCpf(orderRepository)
 const simulateFreight = new SimulateFreight(itemRepository, zipCodeRepository)
 
 const httpServer = new ExpressAdapter()
 new RestController(httpServer, preview, checkout, getOrderByCpf, simulateFreight)
-httpServer.listen(3000)
+httpServer.listen(3004)
