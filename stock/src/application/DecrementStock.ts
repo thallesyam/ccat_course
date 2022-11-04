@@ -1,17 +1,20 @@
-import StockEntry from "../domain/entity/StockEntry"
+import StockEntry from "../domain/entity/StockEntry";
 import StockRepository from "../domain/repository/stock-repository"
 
 export default class DecrementStock {
-  constructor (
-    readonly stockRepository: StockRepository
-  ) {}
 
-  async execute(input: Input): Promise<void> {
-    await this.stockRepository.save(new StockEntry(input.idItem, 'out', input.quantity))
-  }
+	constructor (readonly stockRepository: StockRepository) {
+	}
+
+	async execute (input: Input): Promise<void> {
+		for (const orderItem of input.order.orderItems) {
+			await this.stockRepository.save(new StockEntry(orderItem.idItem, "out", orderItem.quantity));
+		}
+	}
 }
 
 type Input = {
-  idItem: number,
-  quantity: number
+	order: {
+		orderItems: { idItem: number, quantity: number }[]
+	}
 }
