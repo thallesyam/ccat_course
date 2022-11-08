@@ -4,7 +4,12 @@
 </script>
 
 <template>
-  {{ item.description }}
-  {{ item.price }}
-  <button @click="$emit('add', item)">Add</button>
+  <div class="item-description">
+    {{ item.description }}
+  </div>
+  <div class="item-price">
+    {{ item.price }}
+  </div>
+
+  <button class="item-add" @click="$emit('add', item)">Add</button>
 </template>

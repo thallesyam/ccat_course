@@ -17,7 +17,8 @@ export default class CheckoutHttpGateway implements CheckoutGateway {
   }
 
   async preview(order: any): Promise<any> {
-    return this.httpClient.post(`${this.baseUrl}/preview`, order)
+    const preview = await this.httpClient.post(`${this.baseUrl}/preview`, order)
+    return preview.total
      
   }
 

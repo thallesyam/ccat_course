@@ -15,7 +15,9 @@
   
   <input type="text" v-model="order.coupon" @blur="$emit('validateCoupon', order.coupon)">
   <br/>
-  Total - {{ total }}
+  <div class="order-total">
+    Total - {{ total }}
+  </div>
 
   <br/>
 
