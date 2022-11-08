@@ -10,7 +10,7 @@ export default class Cpf {
   }
   
   private cpfValidator (cpf: string) {
-    if(!cpf) throw new Error('Invalid Cpf')
+    if(!cpf) return false
     cpf = this.formatCpf(cpf)
     if(!this.isValidLength(cpf)) throw new Error('Invalid Cpf')
     if(this.hasAllDigitsEqual(cpf)) throw new Error('Invalid Cpf')

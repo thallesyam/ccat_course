@@ -14,6 +14,10 @@ export default class ItemRepositoryMemory implements ItemRepository {
     return item
   }
 
+  async getItems(): Promise<Item[]> {
+		return this.items;
+	}
+
   async save(item: Item): Promise<void> {
     this.items.push(item)
   }
