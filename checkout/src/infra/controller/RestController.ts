@@ -1,5 +1,6 @@
 import Checkout from "../../application/Checkout";
 import GetOrdersByCpf from "../../application/GetOrdersByCpf";
+import GetOrdersByCpfQuery from "../../application/GetOrdersByCpfQuery";
 import Preview from "../../application/Preview";
 import ValidateCoupon from "../../application/ValidateCoupon";
 import HttpServer from "../http/HttpServer";
@@ -12,6 +13,7 @@ export default class OrderController {
 		readonly preview: Preview, 
 		readonly checkout: Checkout,
 		readonly getOrdersByCpf: GetOrdersByCpf,
+		readonly getOrdersByCpfQuery: GetOrdersByCpfQuery,
 		readonly validateCoupon: ValidateCoupon,
 		readonly queue: Queue
 	) {
@@ -30,7 +32,7 @@ export default class OrderController {
 		});
 		
 		httpServer.on("get", "/orders/:cpf", async function (params: any, body: any) {
-			const orders = await getOrdersByCpf.execute(params.cpf);
+			const orders = await getOrdersByCpfQuery.execute(params.cpf);
 			return orders;
 		});
 	}

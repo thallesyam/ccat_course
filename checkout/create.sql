@@ -56,3 +56,9 @@ create table order_item (
 	quantity integer,
 	primary key (id_order, id_item)
 )
+
+create table order_projection (
+	cpf text,
+	code text,
+	data jsonb
+);
